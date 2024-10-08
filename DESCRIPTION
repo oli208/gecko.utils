@@ -6,5 +6,16 @@ Authors@R:
 Description: A set of extensions and customisations for ggplot2 and further functions for smarter data handling..
 License: GPL (>= 3)
 Encoding: UTF-8
+Depends: 
+    R (>= 4.0)
+Imports: 
+    ggplot2 (>= 3.3.0),
+    extrafont,
+    tools,
+    rstudioapi,
+    dplyr,
+    janitor,
+    readxl,
+    stringdist
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
