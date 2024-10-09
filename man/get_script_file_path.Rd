@@ -14,3 +14,7 @@ This function attempts to retrieve the path of the currently active script
 in RStudio or the currently sourced script in non-interactive sessions.
 If neither is available, it will throw an error.
 }
+\details{
+An error is thrown if the script file path cannot be determined
+either through the RStudio API or the fallback method.
+}
