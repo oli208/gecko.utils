@@ -11,6 +11,7 @@
 #' @param axis_title_size Font size for the axis titles. Defaults to 12.
 #' @param axis_text_size Font size for the axis text. Defaults to 11.
 #' @return A ggplot2 theme object.
+#' @export
 theme_gecko <- function(
         font_family = "Noto Sans",         # Default font family
         title_size = 20,                   # Title font size
@@ -30,36 +31,36 @@ theme_gecko <- function(
         extrafont::loadfonts(device = "win", quiet = TRUE)  # Load fonts
     }
 
-    theme_linedraw() %+replace%    # Replace elements we want to change
+    ggplot2::theme_linedraw() %+replace%    # Replace elements we want to change
 
-        theme(
+        ggplot2::theme(
             # Grid elements
-            panel.grid.major = element_blank(),    # Remove major gridlines
-            panel.grid.minor = element_blank(),    # Remove minor gridlines
+            panel.grid.major = ggplot2::element_blank(),    # Remove major gridlines
+            panel.grid.minor = ggplot2::element_blank(),    # Remove minor gridlines
 
             # Text elements
-            plot.title = element_text(
+            plot.title = ggplot2::element_text(
                 family = font_family,      # Set font family
                 size = title_size,         # Set font size
                 face = 'bold',             # Bold typeface
                 hjust = 0,                 # Left align
                 vjust = 2),                # Raise slightly
 
-            plot.subtitle = element_text(
+            plot.subtitle = ggplot2::element_text(
                 family = font_family,      # Font family
                 size = subtitle_size),     # Font size
 
-            plot.caption = element_text(
+            plot.caption = ggplot2::element_text(
                 family = font_family,      # Font family
                 size = caption_size,       # Font size
                 hjust = 1),                # Right align
 
-            axis.title = element_text(
+            axis.title = ggplot2::element_text(
                 family = font_family,      # Font family
                 face = 'bold',             # Bold typeface
                 size = axis_title_size),   # Font size
 
-            axis.text = element_text(
+            axis.text = ggplot2::element_text(
                 family = font_family,      # Font family
                 size = axis_text_size)     # Font size
         )
