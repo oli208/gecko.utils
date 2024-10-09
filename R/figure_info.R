@@ -7,6 +7,8 @@
 #' @param include_r_version Optional. A logical indicating whether to include R version information in the caption. Defaults to TRUE.
 #' @param datetime_format Optional. A string defining the date and time format for the caption. Defaults to "%d.%m.%Y %X".
 #' @return A `figure_info` object that can be added to a ggplot object.
+#' @import ggplot2
+#' @export
 figure_info <- function(custom_text = NULL, include_r_version = TRUE, datetime_format = "%d.%m.%Y %X") {
   # Get the current date and time formatted as per the argument
   current_datetime <- format(Sys.time(), datetime_format)
@@ -40,6 +42,7 @@ figure_info <- function(custom_text = NULL, include_r_version = TRUE, datetime_f
 }
 
 # Define the ggplot_add method for figure_info class
+#' @export
 ggplot_add.figure_info <- function(object, plot, object_name) {
   # Check if the plot already has a caption
   if (!is.null(plot$labels$caption)) {
