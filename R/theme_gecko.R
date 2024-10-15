@@ -65,7 +65,15 @@ theme_gecko <- function(
 
             axis.text = ggplot2::element_text(
                 family = font_family,      # Font family
-                size = axis_text_size)     # Font size
+                size = axis_text_size),    # Font size
+
+            legend.text = ggplot2::element_text(
+                family = font_family,      # Font family
+                size = axis_text_size),    # Font size
+
+            legend.title = ggplot2::element_text(
+                family = font_family,      # Font family
+                size = axis_title_size)    # Font size
         )
 }
 
