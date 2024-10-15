@@ -23,6 +23,9 @@ theme_gecko <- function(
     # Ensure the extrafont package is loaded
     if (!requireNamespace("extrafont", quietly = TRUE)) {
         stop("The 'extrafont' package is required but not installed. Please install it.")
+    } else {
+        # Load the extrafont package
+        library(extrafont)
     }
 
     # Check if fonts are loaded
