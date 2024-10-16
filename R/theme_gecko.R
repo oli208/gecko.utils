@@ -73,7 +73,16 @@ theme_gecko <- function(
 
             legend.title = ggplot2::element_text(
                 family = font_family,      # Font family
-                size = axis_title_size)    # Font size
+                size = axis_title_size),   # Font size
+
+
+            strip.background = ggplot2::element_blank(),
+            strip.text = ggplot2::element_text(
+                color = '#000000',
+                family = font_family,      # Font family
+                face = 'bold',             # Bold typeface
+                size = axis_title_size,    # Font size
+                vjust = 1)
         )
 }
 
