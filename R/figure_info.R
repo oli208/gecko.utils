@@ -22,7 +22,7 @@ figure_info <- function(custom_text = NULL, include_r_version = TRUE, datetime_f
 
   # Get R version info, clean the string to avoid duplication
   r_version_info <- if (include_r_version) {
-    r_version <- sessionInfo()$R.version$version.string
+    r_version <- utils::sessionInfo()$R.version$version.string
     # Remove the redundant "R version" part
     sub("^R version ", "", r_version)
   } else {
