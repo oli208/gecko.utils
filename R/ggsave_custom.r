@@ -5,13 +5,13 @@
 #' to ensure better traceability of figures.
 #'
 #' @param name A string representing the name of the plot (to be included in the filename).
-#' @param filepath The path where the file will be saved. Defaults to "../06_graphics/". You can use set_ggsave_path() to change the default path for your total R-project.
+#' @param filepath The path where the file will be saved. Defaults to current working directory . You can use set_ggsave_path() to change the default path for your total R-project.
 #' @param dateformat The date format to be used in the filename. Defaults to "%y%m%d".
 #' @param ... Additional arguments passed to ggsave (e.g., width, height, etc.).
 #' @return Saves a file and returns the full path of the saved file.
 #' @details An error if the file path does not exist and cannot be created.
 #' @export
-ggsave_custom <- function(name, filepath = getOption("ggsave.path", "../06_graphics/"), dateformat = "%y%m%d", ...) {
+ggsave_custom <- function(name, filepath = getOption("ggsave.path", "./"), dateformat = "%y%m%d", ...) {
     # Get the current script file path
     script_path <- get_script_file_path()
 
