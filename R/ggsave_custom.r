@@ -5,13 +5,13 @@
 #' to ensure better traceability of figures.
 #'
 #' @param name A string representing the name of the plot (to be included in the filename).
-#' @param filepath The path where the plot should be saved. Defaults to "../06_graphics/".
+#' @param filepath The path where the file will be saved. Defaults to current working directory . You can use set_ggsave_path() to change the default path for your total R-project.
 #' @param dateformat The date format to be used in the filename. Defaults to "%y%m%d".
 #' @param ... Additional arguments passed to ggsave (e.g., width, height, etc.).
 #' @return Saves a file and returns the full path of the saved file.
 #' @details An error if the file path does not exist and cannot be created.
 #' @export
-ggsave_custom <- function(name, filepath = "../06_graphics/", dateformat = "%y%m%d", ...) {
+ggsave_custom <- function(name, filepath = getOption("ggsave.path", "./"), dateformat = "%y%m%d", ...) {
     # Get the current script file path
     script_path <- get_script_file_path()
 
@@ -22,7 +22,7 @@ ggsave_custom <- function(name, filepath = "../06_graphics/", dateformat = "%y%m
     current_date <- format(Sys.time(), format = dateformat)
 
     # Ensure the filepath is normalized and create the directory if it doesn't exist
-    normalized_filepath <- normalizePath(filepath, mustWork = FALSE)
+    normalized_filepath <- normalizePath(filepath, winslash = "/",  mustWork = FALSE)
     if (!dir.exists(normalized_filepath)) {
         dir.create(normalized_filepath, recursive = TRUE)
     }

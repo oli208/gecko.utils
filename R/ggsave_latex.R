@@ -4,14 +4,14 @@
 #' version of each figure (without a date in the filename) is stored. Older versions are moved to an archive.
 #'
 #' @param plot_name A string representing the name of the plot (to be included in the filename).
-#' @param base_dir The base path for the plot. Defaults to "../06_graphics/".
+#' @param base_dir The base path for the plot. Defaults to current working directory. You can use set_ggsave_path() to change the default path for your total R-project.
 #' @param latex_subdir The subdirectory for LaTeX files within the base path. Defaults to "latex".
 #' @param archive_subdir The subdirectory where older versions are moved. Defaults to "archive".
 #' @param date_format The date format to be used for archiving. Defaults to "%y%m%d".
 #' @param ... Additional arguments passed to ggsave (e.g., width, height, etc.).
 #' @return The full path of the saved figure in the LaTeX directory.
 #' @export
-ggsave_latex <- function(plot_name, base_dir = "../06_graphics/",
+ggsave_latex <- function(plot_name, base_dir = getOption("ggsave.path", "./"),
                          latex_subdir = "latex", archive_subdir = "archive",
                          date_format = "%y%m%d", ...) {
 
