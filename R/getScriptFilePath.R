@@ -7,7 +7,6 @@
 #' @return A string with the full normalized path of the current script.
 #' @details An error is thrown if the script file path cannot be determined
 #'          either through the RStudio API or the fallback method.
-#' @export
 get_script_file_path <- function() {
     script_path <- tryCatch({
         # Try to get the active document path in RStudio

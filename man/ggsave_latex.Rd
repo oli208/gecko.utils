@@ -6,23 +6,30 @@
 \usage{
 ggsave_latex(
   plot_name,
-  base_dir = "../06_graphics/",
+  plot_obj = NULL,
+  base_dir = getOption("ggsave.path", "./"),
   latex_subdir = "latex",
   archive_subdir = "archive",
   date_format = "\%y\%m\%d",
+  print_from_device = FALSE,
   ...
 )
 }
 \arguments{
 \item{plot_name}{A string representing the name of the plot (to be included in the filename).}
 
-\item{base_dir}{The base path for the plot. Defaults to "../06_graphics/".}
+\item{plot_obj}{The ggplot object to be saved.
+If not provided, it will use the last ggplot created (\code{ggplot2::last_plot()}).}
+
+\item{base_dir}{The base path for the plot. Defaults to current working directory. You can use set_ggsave_path() to change the default path for your total R-project.}
 
 \item{latex_subdir}{The subdirectory for LaTeX files within the base path. Defaults to "latex".}
 
 \item{archive_subdir}{The subdirectory where older versions are moved. Defaults to "archive".}
 
 \item{date_format}{The date format to be used for archiving. Defaults to "\%y\%m\%d".}
+
+\item{print_from_device}{A logical value indicating whether to print the plot from the device (base R plot) or from ggplot2. Defaults to FALSE.}
 
 \item{...}{Additional arguments passed to ggsave (e.g., width, height, etc.).}
 }

@@ -2,31 +2,39 @@
 % Please edit documentation in R/ggsave_custom.r
 \name{ggsave_custom}
 \alias{ggsave_custom}
-\title{Custom ggsave function to save ggplot figures with metadata in filename}
+\title{Save plot with custom filename for multiple plot types}
 \usage{
 ggsave_custom(
   name,
-  filepath = "../06_graphics/",
+  plot_obj = NULL,
+  filepath = getOption("ggsave.path", "./"),
   dateformat = "\%y\%m\%d",
+  print_from_device = FALSE,
   ...
 )
 }
 \arguments{
 \item{name}{A string representing the name of the plot (to be included in the filename).}
 
-\item{filepath}{The path where the plot should be saved. Defaults to "../06_graphics/".}
+\item{plot_obj}{The ggplot object to be saved.
+If not provided, it will use the last ggplot created (\code{ggplot2::last_plot()}).}
+
+\item{filepath}{The directory where the file will be saved. Defaults to current working directory . You can use set_ggsave_path() to change the default path for your total R-project.}
 
 \item{dateformat}{The date format to be used in the filename. Defaults to "\%y\%m\%d".}
 
-\item{...}{Additional arguments passed to ggsave (e.g., width, height, etc.).}
+\item{print_from_device}{A logical value indicating whether to print the plot from the device (base R plot) or from ggplot2. Defaults to FALSE.}
+
+\item{...}{Additional arguments passed to \verb{ggplot2::ggsave()`` or }png()` (e.g., width, height, etc.).}
 }
 \value{
 Saves a file and returns the full path of the saved file.
 }
 \description{
-This function saves a ggplot object with a custom filename that includes
-the script name and the current date. It uses a flexible naming convention
+This function saves a plots with a custom filename that includes
+the script name, plot name and the current date. It uses a flexible naming convention
 to ensure better traceability of figures.
+If no plot is provided, it will save the last ggplot created or the active plot on the graphics device.
 }
 \details{
 An error if the file path does not exist and cannot be created.
