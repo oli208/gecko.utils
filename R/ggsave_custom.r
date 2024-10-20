@@ -1,17 +1,22 @@
-#' Custom ggsave function to save ggplot figures with metadata in filename
+#' Save plot with custom filename for multiple plot types
 #'
-#' This function saves a ggplot object with a custom filename that includes
-#' the script name and the current date. It uses a flexible naming convention
+#' This function saves a plots with a custom filename that includes
+#' the script name, plot name and the current date. It uses a flexible naming convention
 #' to ensure better traceability of figures.
+#' If no plot is provided, it will save the last ggplot created or the active plot on the graphics device.
 #'
 #' @param name A string representing the name of the plot (to be included in the filename).
-#' @param filepath The path where the file will be saved. Defaults to current working directory . You can use set_ggsave_path() to change the default path for your total R-project.
+#' @param plot_obj The ggplot object to be saved.
+#'                 If not provided, it will use the last ggplot created (`ggplot2::last_plot()`).
+#' @param filepath The directory where the file will be saved. Defaults to current working directory . You can use set_ggsave_path() to change the default path for your total R-project.
 #' @param dateformat The date format to be used in the filename. Defaults to "%y%m%d".
-#' @param ... Additional arguments passed to ggsave (e.g., width, height, etc.).
+#' @param print_from_device A logical value indicating whether to print the plot from the device (base R plot) or from ggplot2. Defaults to FALSE.
+#' @param ... Additional arguments passed to `ggplot2::ggsave()`` or `png()` (e.g., width, height, etc.).
 #' @return Saves a file and returns the full path of the saved file.
 #' @details An error if the file path does not exist and cannot be created.
 #' @export
-ggsave_custom <- function(name, filepath = getOption("ggsave.path", "./"), dateformat = "%y%m%d", ...) {
+ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("ggsave.path", "./"),
+                          dateformat = "%y%m%d", print_from_device = FALSE, ...) {
     # Get the current script file path
     script_path <- get_script_file_path()
 
@@ -30,8 +35,13 @@ ggsave_custom <- function(name, filepath = getOption("ggsave.path", "./"), datef
     # Create the full output file path (with PNG extension)
     full_path <- file.path(normalized_filepath, paste0(script_filename, "_", name, "_", current_date, ".png"))
 
-    # Save the current ggplot with the provided options, units default to cm
-    ggsave(full_path, units = "cm", ...)
+    # Use helper function to save the plot based on the plot_type
+    gecko.utils:::save_plot(full_path = full_path,
+                            plot_obj = plot_obj,
+                            print_from_device = print_from_device,
+                            ...
+                            )
+
 
     # Return the full path of the saved file (useful for logging or confirmation)
     return(full_path)
