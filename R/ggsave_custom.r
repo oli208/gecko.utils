@@ -1,4 +1,4 @@
-#' Save plot with custom filename for multiple plot types (ggplot2, base R)
+#' Save plot with custom filename for multiple plot types
 #'
 #' This function saves a plots with a custom filename that includes
 #' the script name, plot name and the current date. It uses a flexible naming convention
@@ -35,26 +35,13 @@ ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("ggsave.pa
     # Create the full output file path (with PNG extension)
     full_path <- file.path(normalized_filepath, paste0(script_filename, "_", name, "_", current_date, ".png"))
 
-    # Saving ggplot2 type
-    if (print_from_device == FALSE) {
-        if (is.null(plot_obj)) {
-            if (!is.null(ggplot2::last_plot())) {
-                plot_obj <- ggplot2::last_plot()
-            } else {
-                stop("No ggplot object provided and no last ggplot found.")
-            }
-        }
-        # Save the current ggplot with the provided options, units default to cm
-        ggplot2::ggsave(filename = full_path, plot = plot_obj, ...)
+    # Use helper function to save the plot based on the plot_type
+    gecko.utils:::save_plot(full_path = full_path,
+                            plot_obj = plot_obj,
+                            print_from_device = print_from_device,
+                            ...
+                            )
 
-        # Saving base R plot
-    } else if (print_from_device == TRUE) {
-        dev.copy(png, filename = full_path)
-        dev.off()
-
-    } else {
-        stop("Unsupported plot type. Please use ggplot2 or base R plots")
-    }
 
     # Return the full path of the saved file (useful for logging or confirmation)
     return(full_path)
