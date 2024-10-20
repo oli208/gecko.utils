@@ -18,7 +18,7 @@
 ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("ggsave.path", "./"),
                           dateformat = "%y%m%d", print_from_device = FALSE, ...) {
     # Get the current script file path
-    script_path <- get_script_file_path()
+    script_path <- gecko.utils:::get_script_file_path()
 
     # Extract the script filename without extension
     script_filename <- tools::file_path_sans_ext(basename(script_path))
