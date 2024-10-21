@@ -2,8 +2,8 @@ Package: gecko.utils
 Title: Collection of useful functions for ggplot2 and data manipulation
 Version: 0.0.1
 Authors@R: 
-    person("Oliver", "208", , "git-oliver@web.de", role = c("aut", "cre"))
-Description: A set of extensions and customisations for ggplot2 and further functions for smarter data handling..
+    person("Oliver", "Schappacher", email = "git-oliver@web.de", role = c("aut", "cre"))
+Description: A set of extensions and customisations for ggplot2 and further functions for smarter data handling.
 License: GPL (>= 3)
 Encoding: UTF-8
 Depends: 
