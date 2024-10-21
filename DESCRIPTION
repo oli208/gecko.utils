@@ -9,7 +9,7 @@ Encoding: UTF-8
 Depends: 
     R (>= 4.0)
 Imports: 
-    ggplot2 (>= 3.3.0),
+    ggplot2 (>= 3.5.0),
     extrafont,
     tools,
     rstudioapi,
