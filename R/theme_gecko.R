@@ -11,6 +11,25 @@
 #' @param axis_title_size Font size for the axis titles. Defaults to 12.
 #' @param axis_text_size Font size for the axis text. Defaults to 11.
 #' @return A ggplot2 theme object.
+#' @examples
+#' mtcars2 <- within(mtcars, {
+#' vs <- factor(vs, labels = c("V-shaped", "Straight"))
+#' am <- factor(am, labels = c("Automatic", "Manual"))
+#' cyl  <- factor(cyl)
+#' gear <- factor(gear)
+#' })
+#'
+#' ggplot(mtcars2) +
+#'     geom_point(aes(x = wt, y = mpg, colour = am)) +
+#'     labs(
+#'        title = "Fuel economy declines as weight increases",
+#'         caption = "Data from the 1974 Motor Trend US magazine.",
+#'         x = "Weight (1000 lbs)",
+#'         y = "Fuel economy (mpg)",
+#'         colour = "Gears"
+#'     ) +
+#'     theme_gecko()
+#'
 #' @export
 theme_gecko <- function(
         font_family = "Noto Sans",         # Default font family
