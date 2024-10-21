@@ -67,6 +67,9 @@ theme_gecko <- function(
                 family = font_family,      # Font family
                 size = axis_text_size),    # Font size
 
+            axis.ticks.length = unit(5, "pt"), # Set tick length
+            axis.minor.ticks.length = rel(0.6), # Set minor tick length
+
             legend.text = ggplot2::element_text(
                 family = font_family,      # Font family
                 size = axis_text_size),    # Font size
