@@ -52,7 +52,11 @@ theme_gecko <- function(
         message("Loading fonts from extrafont...")
         extrafont::loadfonts(device = "win", quiet = TRUE)  # Load fonts
     }
-
+    list(
+        ggplot2::guides(
+            x = ggplot2::guide_axis(minor.ticks = TRUE),
+            y = ggplot2::guide_axis(minor.ticks = TRUE)
+        ),
     ggplot2::theme_linedraw() %+replace%    # Replace elements we want to change
 
         ggplot2::theme(
@@ -107,5 +111,6 @@ theme_gecko <- function(
                 size = axis_title_size,    # Font size
                 vjust = 1)
         )
+    )
 }
 
