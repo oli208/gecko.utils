@@ -62,8 +62,14 @@ library(gecko.utils)
 library(ggplot2)
 
 # Example plot
-p <- ggplot(mtcars, aes(wt, mpg)) + 
-    geom_point()
+p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  geom_point() +
+  labs(
+    title = "Sepal dimensions of iris flowers",
+    x = "Sepal Length (cm)",
+    y = "Sepal Width (cm)",
+    colour = "Species"
+  ) 
 ```
 
 ``` save
@@ -88,32 +94,20 @@ When using this function, your directory should be organized as follows:
 Older versions of the plot are moved to the `archive/` folder, while the
 most recent version is saved in `latex/`.
 
-### 3. Add Figure Metadata with `figure_info()`
+### 3. Add Figure Metadata with `figure_info()` and `theme_gecko()`
 
 Enhance `ggplot` figures by embedding important metadata like script
 name, creation date, and R version directly into the plot caption.
 
 ``` r
 # Add figure info (script name, date, R version) to the plot caption
-p + figure_info()
-```
-
-<img src="man/figures/README-figure_info-1.png" width="100%" />
-
-### Use custom gecko theme with `theme_gecko()`
-
-``` r
-# Use gecko theme
-p + theme_gecko()
+p + 
+  figure_info() +
+  theme_gecko() 
 #> Registering fonts with R
 ```
 
-<img src="man/figures/README-theme_gecko-1.png" width="100%" />
-
-## Additional Tools
-
-- `get_script_file_path()`: Automatically retrieve the path of the
-  currently running R script.
+<img src="man/figures/README-figure_info-1.png" width="100%" />
 
 ------------------------------------------------------------------------
 
