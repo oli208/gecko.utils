@@ -48,7 +48,7 @@ theme_gecko <- function(
     }
 
     # Check if fonts are loaded
-    if (!"Noto Sans" %in% extrafont::fonts()) {
+    if (!font_family %in% extrafont::fonts()) {
         message("Loading fonts from extrafont...")
         extrafont::loadfonts(device = "win", quiet = TRUE)  # Load fonts
     }
