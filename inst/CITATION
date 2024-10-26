@@ -1,0 +1,8 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "gecko.utils: A collection of utility functions for plotting and file organisation",
+  author   = "Oliver Schappacher",
+  year     = "2024",
+  note     = "R package version 0.0.1",
+  url      = "https://github.com/oli208/gecko.utils"
+)
