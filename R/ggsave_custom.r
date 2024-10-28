@@ -15,7 +15,7 @@
 #' @return Saves a file and returns the full path of the saved file.
 #' @details An error if the file path does not exist and cannot be created.
 #' @export
-ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("ggsave.path", "./"),
+ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("figure_save_path", "./"),
                           dateformat = "%y%m%d", print_from_device = FALSE, ...) {
     # Get the current script file path
     script_path <- gecko.utils:::get_script_file_path()

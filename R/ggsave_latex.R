@@ -14,7 +14,7 @@
 #' @param ... Additional arguments passed to ggsave (e.g., width, height, etc.).
 #' @return The full path of the saved figure in the LaTeX directory.
 #' @export
-ggsave_latex <- function(plot_name, plot_obj = NULL, base_dir = getOption("ggsave.path", "./"),
+ggsave_latex <- function(plot_name, plot_obj = NULL, base_dir = getOption("figure_save_path", "./"),
                          latex_subdir = "latex", archive_subdir = "archive",
                          date_format = "%y%m%d", print_from_device = FALSE, ...) {
 
