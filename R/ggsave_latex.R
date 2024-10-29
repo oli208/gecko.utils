@@ -1,5 +1,12 @@
 #' Save ggplot figure for LaTeX workflow with file version management
 #'
+#'
+#' @description
+#' `r lifecycle::badge("superseded")`
+#'
+#' The functionality of this function has been superseded by the `save_plot_with_metadata()` function.
+#'
+#'
 #' This function saves ggplot figures to a directory used for LaTeX, ensuring that only the newest
 #' version of each figure (without a date in the filename) is stored. Older versions are moved to an archive.
 #'
@@ -17,6 +24,9 @@
 ggsave_latex <- function(plot_name, plot_obj = NULL, base_dir = getOption("figure_save_path", "./"),
                          latex_subdir = "latex", archive_subdir = "archive",
                          date_format = "%y%m%d", print_from_device = FALSE, ...) {
+
+    lifecycle::signal_stage("superseded", "ggsave_latex()", "save_plot_with_metadata()")
+
 
     # Construct full paths for the LaTeX and archive directories
     latex_dir <- file.path(base_dir, latex_subdir)
