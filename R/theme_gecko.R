@@ -14,14 +14,16 @@
 #' @import ggplot2
 #' @importFrom extrafont fonts loadfonts
 #' @examples
-#' mtcars2 <- within(mtcars, {
+#' library(ggplot2)
+#'
+#' data <- within(mtcars, {
 #'   vs <- factor(vs, labels = c("V-shaped", "Straight"))
 #'   am <- factor(am, labels = c("Automatic", "Manual"))
 #'   cyl <- factor(cyl)
 #'   gear <- factor(gear)
 #' })
 #'
-#' ggplot(mtcars2) +
+#' ggplot(data) +
 #'   geom_point(aes(x = wt, y = mpg, colour = am)) +
 #'   labs(
 #'     title = "Fuel economy declines as weight increases",

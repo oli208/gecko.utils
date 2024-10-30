@@ -35,22 +35,24 @@ This function provides a custom ggplot2 theme with options for changing fonts an
 It ensures that extrafont is loaded and the fonts are registered if necessary.
 }
 \examples{
-mtcars2 <- within(mtcars, {
-vs <- factor(vs, labels = c("V-shaped", "Straight"))
-am <- factor(am, labels = c("Automatic", "Manual"))
-cyl  <- factor(cyl)
-gear <- factor(gear)
+library(ggplot2)
+
+data <- within(mtcars, {
+  vs <- factor(vs, labels = c("V-shaped", "Straight"))
+  am <- factor(am, labels = c("Automatic", "Manual"))
+  cyl <- factor(cyl)
+  gear <- factor(gear)
 })
 
-ggplot(mtcars2) +
-    geom_point(aes(x = wt, y = mpg, colour = am)) +
-    labs(
-       title = "Fuel economy declines as weight increases",
-        caption = "Data from the 1974 Motor Trend US magazine.",
-        x = "Weight (1000 lbs)",
-        y = "Fuel economy (mpg)",
-        colour = "Gears"
-    ) +
-    theme_gecko()
+ggplot(data) +
+  geom_point(aes(x = wt, y = mpg, colour = am)) +
+  labs(
+    title = "Fuel economy declines as weight increases",
+    caption = "Data from the 1974 Motor Trend US magazine.",
+    x = "Weight (1000 lbs)",
+    y = "Fuel economy (mpg)",
+    colour = "Gears"
+  ) +
+  theme_gecko()
 
 }
