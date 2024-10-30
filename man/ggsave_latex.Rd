@@ -37,6 +37,10 @@ If not provided, it will use the last ggplot created (\code{ggplot2::last_plot()
 The full path of the saved figure in the LaTeX directory.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+
+The functionality of this function has been superseded by the \code{save_plot_with_metadata()} function.
+
 This function saves ggplot figures to a directory used for LaTeX, ensuring that only the newest
 version of each figure (without a date in the filename) is stored. Older versions are moved to an archive.
 }

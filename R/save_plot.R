@@ -6,6 +6,8 @@
 #' @param plot_obj The plot object for ggplot2 (if applicable).
 #' @param print_from_device A logical indicating whether to save the plot from the current device (for base R plots).
 #' @param ... Additional arguments passed to the ggsave function (for ggplot) or png (for base R).
+#' @import ggplot2
+#' @importFrom grDevices dev.copy dev.off
 #' @return The full path of the saved file.
 save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, ...) {
 

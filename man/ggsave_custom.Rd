@@ -31,6 +31,10 @@ If not provided, it will use the last ggplot created (\code{ggplot2::last_plot()
 Saves a file and returns the full path of the saved file.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+
+The functionality of this function has been superseded by the \code{save_plot_with_metadata()} function.
+
 This function saves a plots with a custom filename that includes
 the script name, plot name and the current date. It uses a flexible naming convention
 to ensure better traceability of figures.

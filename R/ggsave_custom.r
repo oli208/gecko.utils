@@ -1,5 +1,11 @@
 #' Save plot with custom filename for multiple plot types
 #'
+#' @description
+#' `r lifecycle::badge("superseded")`
+#'
+#' The functionality of this function has been superseded by the `save_plot_with_metadata()` function.
+#'
+#'
 #' This function saves a plots with a custom filename that includes
 #' the script name, plot name and the current date. It uses a flexible naming convention
 #' to ensure better traceability of figures.
@@ -15,10 +21,14 @@
 #' @return Saves a file and returns the full path of the saved file.
 #' @details An error if the file path does not exist and cannot be created.
 #' @export
-ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("ggsave.path", "./"),
+ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("figure_save_path", "./"),
                           dateformat = "%y%m%d", print_from_device = FALSE, ...) {
-    # Get the current script file path
-    script_path <- gecko.utils:::get_script_file_path()
+    lifecycle::deprecate_warn("0.0.1", "ggsave_custom()", "save_plot_with_metadata()")
+
+
+
+     # Get the current script file path
+    script_path <- gecko.utils:::get_current_script_path()
 
     # Extract the script filename without extension
     script_filename <- tools::file_path_sans_ext(basename(script_path))

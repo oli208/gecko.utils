@@ -1,6 +1,6 @@
-#' Helper function to set ggsave.path in .Rprofile
+#' Helper function to set figure_save_path in .Rprofile
 #'
-#' This function helps users set and persist the `ggsave.path` option in the project's `.Rprofile`.
+#' This function helps users set and persist the `figure_save_path` option in the project's `.Rprofile`.
 #' Users can specify a directory to store figues and choose whether to apply the setting interactively.
 #'
 #' @param path Optional. A character string representing the directory to save figures. Defaults to NULL.
@@ -9,8 +9,9 @@
 #' @param confirm_overwrite Logical. Whether to ask for confirmation before overwriting an existing .Rprofile file. Defaults to TRUE.
 #'
 #' @return The path that was set in the `.Rprofile` file.
+#' @importFrom rprojroot find_rstudio_root_file
 #' @export
-set_ggsave_path <- function(path = NULL, interactive = TRUE, confirm_overwrite = TRUE) {
+set_figure_save_path <- function(path = NULL, interactive = TRUE, confirm_overwrite = TRUE) {
 
     # Get the current working directory and R project root
     project_root <- rprojroot::find_rstudio_root_file()
@@ -43,7 +44,7 @@ set_ggsave_path <- function(path = NULL, interactive = TRUE, confirm_overwrite =
     # Check if the .Rprofile exists
     if (file.exists(rprofile_path)) {
         if (confirm_overwrite && interactive) {
-            overwrite <- readline("An .Rprofile already exists. Do you want to append the ggsave.path setting to it? (y/n): ")
+            overwrite <- readline("An .Rprofile already exists. Do you want to append the figure_save_path setting to it? (y/n): ")
             if (tolower(overwrite) != "y") {
                 message("Operation canceled. No changes were made.")
                 return(invisible(NULL))
@@ -54,12 +55,12 @@ set_ggsave_path <- function(path = NULL, interactive = TRUE, confirm_overwrite =
     }
 
     # Define the line to append
-    ggsave_option <- paste0("options(ggsave.path = '", path, "')\n")
+    figure_save_option <- paste0("options(figure_save_path = '", path, "')\n")
 
     # Append or create the .Rprofile with the new option
-    write(ggsave_option, file = rprofile_path, append = TRUE)
+    write(figure_save_option, file = rprofile_path, append = TRUE)
 
-    message("ggsave.path has been set to '", path, "' and saved in the project's .Rprofile.")
+    message("figure_save_path has been set to '", path, "' and saved in the project's .Rprofile.")
     message("You will need to restart your R session for the change to take effect.")
 
     return(invisible(path))

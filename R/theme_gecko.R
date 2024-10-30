@@ -11,15 +11,19 @@
 #' @param axis_title_size Font size for the axis titles. Defaults to 12.
 #' @param axis_text_size Font size for the axis text. Defaults to 11.
 #' @return A ggplot2 theme object.
+#' @import ggplot2
+#' @importFrom extrafont fonts loadfonts
 #' @examples
-#' mtcars2 <- within(mtcars, {
+#' library(ggplot2)
+#'
+#' data <- within(mtcars, {
 #'   vs <- factor(vs, labels = c("V-shaped", "Straight"))
 #'   am <- factor(am, labels = c("Automatic", "Manual"))
 #'   cyl <- factor(cyl)
 #'   gear <- factor(gear)
 #' })
 #'
-#' ggplot(mtcars2) +
+#' ggplot(data) +
 #'   geom_point(aes(x = wt, y = mpg, colour = am)) +
 #'   labs(
 #'     title = "Fuel economy declines as weight increases",
