@@ -28,7 +28,7 @@ ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("figure_sa
 
 
      # Get the current script file path
-    script_path <- gecko.utils:::get_script_file_path()
+    script_path <- gecko.utils:::get_current_script_path()
 
     # Extract the script filename without extension
     script_filename <- tools::file_path_sans_ext(basename(script_path))

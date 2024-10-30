@@ -42,7 +42,7 @@ ggsave_latex <- function(plot_name, plot_obj = NULL, base_dir = getOption("figur
     }
 
     # Get the script name and create the base filename without date
-    script_name <- tools::file_path_sans_ext(basename(gecko.utils:::get_script_file_path()))
+    script_name <- tools::file_path_sans_ext(basename(gecko.utils:::get_current_script_path()))
     base_filename <- paste0(script_name, "_", plot_name)
 
     # Full path for the LaTeX file (without date)
