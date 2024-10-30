@@ -9,6 +9,7 @@
 #' @param confirm_overwrite Logical. Whether to ask for confirmation before overwriting an existing .Rprofile file. Defaults to TRUE.
 #'
 #' @return The path that was set in the `.Rprofile` file.
+#' @importFrom rprojroot find_rstudio_root_file
 #' @export
 set_figure_save_path <- function(path = NULL, interactive = TRUE, confirm_overwrite = TRUE) {
 

@@ -11,6 +11,8 @@
 #' @param axis_title_size Font size for the axis titles. Defaults to 12.
 #' @param axis_text_size Font size for the axis text. Defaults to 11.
 #' @return A ggplot2 theme object.
+#' @import ggplot2
+#' @importFrom extrafont fonts loadfonts
 #' @examples
 #' mtcars2 <- within(mtcars, {
 #'   vs <- factor(vs, labels = c("V-shaped", "Straight"))
