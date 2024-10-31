@@ -7,7 +7,7 @@
 ggsave_custom(
   name,
   plot_obj = NULL,
-  filepath = getOption("ggsave.path", "./"),
+  filepath = getOption("figure_save_path", "./"),
   dateformat = "\%y\%m\%d",
   print_from_device = FALSE,
   ...
