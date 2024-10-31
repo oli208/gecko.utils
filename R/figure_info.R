@@ -15,7 +15,7 @@ figure_info <- function(custom_text = NULL, include_r_version = TRUE, datetime_f
 
   # Get the script name using the helper function, fallback if path is unavailable
   script_name <- tryCatch({
-    basename(get_script_file_path())
+    get_current_script_path(only_filename = TRUE)
   }, error = function(e) {
     "Unknown script"
   })
