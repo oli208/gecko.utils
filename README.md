@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gecko.utils 📊🦎
+# gecko.utils 📊🦎 <img src="man/figures/logo.png" align="right" height="150" alt="" />
 
 **A utility package for streamlined figure saving and metadata
 management in R, especially for LaTeX and project-based workflows.**
@@ -22,16 +22,14 @@ features, so you can focus on your analysis instead of managing files.
 
 ## Features
 
-- `theme_gecko()`: A custom `ggplot2` theme with improved typography and
-  styling.
+- `theme_gecko()`: A custom `ggplot2` theme with minimal style.
 - `figure_info()`: Add metadata such as the R script name, creation
-  date, and R version directly to your plot captions for improved
-  traceability.
-- `ggsave_custom()`: Save `ggplot` figures with file names that include
-  the script name and the date of creation.
-- `ggsave_latex()`: Automatically archive older versions of figures and
-  save the latest version in a `latex` subfolder, ensuring that figures
-  remain easy to access for LaTeX users (without cluttering file names
+  date, and R version directly to your plot captions
+- `save_plot_with_metadata()`: Save `ggplot` and base R figures with
+  file names that include the script name and the date of creation.
+  There is an option to automatically archive older versions of figures
+  and save the latest version in a subfolder, so that figures can be
+  easily referenced from the latest file (without cluttering file names
   with dates).
 
 ## Installation
@@ -52,10 +50,10 @@ devtools::install_github("oli208/gecko.utils")
 
 ### 1. Saving Figures with Metadata:
 
-The function `ggsave_custom()` allows you to save a figure with a custom
-file name that includes the script name and creation date. This improves
-traceability and ensures you can quickly identify figures based on their
-origin.
+The function `save_plot_with_metadata()` allows you to save a figure
+with a custom file name that includes the script name and creation date.
+This improves traceability and ensures you can quickly identify figures
+based on their origin.
 
 ``` r
 library(gecko.utils)
@@ -73,41 +71,85 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 ```
 
 ``` save
-# Save plot using ggsave_custom
-ggsave_custom("scatterplot", filepath = "images", width = 10, height = 7)
+# Save plot using save_plot_with_metadata
+save_plot_with_metadata(plot_name = "scatterplot", filepath = "images", width = 10, height = 7)
 ```
 
-### 2. LaTeX Integration with `ggsave_latex()`:
+There are several arguments you can use with `save_plot_with_metadata()`
+to customize the file name. With the example above, the saved figure
+will be named `scriptname_scatterplot_210920.png` and saved in the
+`images/` directory. The aim is to make it easier to identify the script
+that generated the figure and when it was created.
 
-The `ggsave_latex()` function is specifically designed for users working
-with LaTeX. It saves the newest figure without a date in the filename,
-moving older versions to an archive folder.
+The `persist_latest` argument is particularly useful when you want to
+save the latest version of a figure, want to keep different version of a
+plot and you use LaTex or other tools that require a specific file name.
+In this case, the function saves the newest figure without a date in the
+filename, moving older versions to an archive folder.
 
-When using this function, your directory should be organized as follows:
+The file structure will look like this:
 
     /graphics/
-      ├── latex/
-      │   └── my_script_plot1.png
+      ├── latest/
+      │   └── myscript_plot1.png
+      │   └── myscript_plot2.png
+      │   └── myscript_plot3.png
       ├── archive/
-      │   └── my_script_plot1_240101.png
+      │   └── myscript_plot1_240828.png
+      │   └── myscript_plot1_240914.png
+      │   └── myscript_plot1_240916.png
+      │   └── myscript_plot2_241028.png
 
 Older versions of the plot are moved to the `archive/` folder, while the
-most recent version is saved in `latex/`.
+most recent version is saved in `latest/` and can be referenced in your
+document without the date in the filename. The filenames itself help you
+to identify the script that generated the figure.
 
-### 3. Add Figure Metadata with `figure_info()` and `theme_gecko()`
+### 2. Customizing `ggplot2` Figures with `theme_gecko()`
+
+This package also includes a custom `ggplot2` theme called
+`theme_gecko()`. This theme improves the typography and styling of your
+plots. The main goal is to make your plots more clear without
+distracting elements. You can use it with any `ggplot2` plot by adding
+`+ theme_gecko()` to your plot code.
+
+``` r
+# Apply the gecko theme to the plot
+p + 
+  theme_gecko()
+```
+
+### 3. Add Figure Metadata with `figure_info()`
 
 Enhance `ggplot` figures by embedding important metadata like script
-name, creation date, and R version directly into the plot caption.
+name, creation date, and R version directly into the plot caption. The
+caption will be displayed at the bottom of the plot and will include the
+script name, creation date, and R version used to generate the plot.
 
 ``` r
 # Add figure info (script name, date, R version) to the plot caption
 p + 
-  figure_info() +
-  theme_gecko() 
-#> Registering fonts with R
+  figure_info()
 ```
 
-<img src="man/figures/README-figure_info-1.png" width="100%" />
+    #> Registering fonts with R
+
+<img src="man/figures/README-figure_info_theme_gecko-1.png" width="100%" />
+
+### 4. Set the Figure Save Path for the Current Project
+
+The gecko.utils package has the possiblity to get the figure save path
+for the current project. This is useful when you are working with
+R-Projects and want to save the figures in a specific folder. After
+running the function `set_figure_save_path()` the path to the specified
+folder in the current project is saved in the project. This path can be
+used in the `save_plot_with_metadata()` function to save the figures in
+the specified folder, without the need to specify the path to the folder
+every time.
+
+``` r
+set_figure_save_path()
+```
 
 ------------------------------------------------------------------------
 
