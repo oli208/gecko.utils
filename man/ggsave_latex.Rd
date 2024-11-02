@@ -7,7 +7,7 @@
 ggsave_latex(
   plot_name,
   plot_obj = NULL,
-  base_dir = getOption("ggsave.path", "./"),
+  base_dir = getOption("figure_save_path", "./"),
   latex_subdir = "latex",
   archive_subdir = "archive",
   date_format = "\%y\%m\%d",

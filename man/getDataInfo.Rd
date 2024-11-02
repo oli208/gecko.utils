@@ -15,6 +15,8 @@ getDataInfo(variable_name, filepath_sample_info = "../03_data/labdata.xlsx")
 A description of the data field and its corresponding unit, if available.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 This function retrieves information about a specific data field from a metadata file.
 It calculates the Levenshtein distance between the provided variable name and the available data fields
 to suggest the closest matches.
