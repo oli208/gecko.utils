@@ -27,6 +27,13 @@ set_figure_save_path <- function(path = NULL, interactive = TRUE, confirm_overwr
     }
 
     # Validate the provided path
+    if (!(nzchar(path) && grepl("^[^<>:\"|?*]+$", path))) {
+        stop("Invalid path: " , path, ". Please avoid special characters like <>:\"|?*")
+    }
+
+
+
+    # Validate the provided path
     if (!dir.exists(path)) {
         if (interactive) {
             dir_create <- readline(paste("Directory", path, "does not exist. Create it? (y/n): "))
