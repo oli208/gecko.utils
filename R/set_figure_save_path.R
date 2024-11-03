@@ -37,7 +37,9 @@ set_figure_save_path <- function(path = NULL, interactive = TRUE, confirm_overwr
                 stop("Directory does not exist and was not created.")
             }
         } else {
-            stop("Directory does not exist: ", path)
+            # Non-interactive mode automatically creates the directory
+            dir.create(path, recursive = TRUE)
+            message("Directory created: ", path)
         }
     }
 
