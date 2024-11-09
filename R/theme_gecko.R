@@ -12,7 +12,7 @@
 #' @param axis_text_size Font size for the axis text. Defaults to 11.
 #' @return A ggplot2 theme object.
 #' @import ggplot2
-#' @importFrom extrafont fonts loadfonts
+#' @importFrom extrafont fonts loadfonts ttf_import
 #' @examples
 #' library(ggplot2)
 #'
@@ -45,16 +45,29 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
   # Ensure the extrafont package is loaded
   if (!requireNamespace("extrafont", quietly = TRUE)) {
     stop("The 'extrafont' package is required but not installed. Please install it.")
-  } else {
-    # Load the extrafont package
-    library(extrafont)
   }
 
-  # Check if fonts are loaded
-  if (!font_family %in% extrafont::fonts()) {
-    message("Loading fonts from extrafont...")
-    extrafont::loadfonts(device = "win", quiet = TRUE) # Load fonts
+  # Check if the desired font is available; if not, fall back to "Noto Sans" or show a warning
+  if (font_family %in% extrafont::fonts()) {
+    # Load the requested font if available
+    extrafont::loadfonts(device = "win", quiet = TRUE)
+  } else {
+    # If not available, attempt to load Noto Sans
+    if (font_family == "Noto Sans") {
+      load_noto_sans()
+    } else {
+      # Warn user and fall back to Noto Sans if the requested font is not available
+      warning(paste0(
+        font_family, " is not available. Using Noto Sans as a fallback font.\n",
+        "To add this font, install it on your system and use extrafont::font_import() to load it."
+      ))
+      load_noto_sans()
+      font_family <- "Noto Sans"  # Update font to fallback
+    }
   }
+
+
+
   list(
     ggplot2::guides(
       x = ggplot2::guide_axis(minor.ticks = TRUE),
@@ -123,4 +136,24 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
         )
       )
   )
+}
+
+
+
+# Helper function to import and load Noto Sans font
+load_noto_sans <- function() {
+  noto_path <- system.file("fonts", package = "gecko.utils")
+
+  if (noto_path == "") {
+    stop("Noto Sans font files are missing from the package. Please check the installation.")
+  }
+
+  message("Loading Noto Sans font from package directory...")
+  tryCatch({
+    extrafont::ttf_import(paths = noto_path, recursive = TRUE)
+    extrafont::loadfonts(device = "win", quiet = TRUE)
+    message("Noto Sans font successfully imported")
+  }, error = function(e) {
+    stop("Failed to import Noto Sans font. Ensure the font files are in the correct directory and restart.")
+  })
 }
