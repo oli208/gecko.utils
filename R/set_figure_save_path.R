@@ -22,8 +22,17 @@
 set_figure_save_path <- function(path = NULL, interactive = TRUE, confirm_overwrite = TRUE) {
 
     # Get the current working directory and R project root
-    project_root <- rprojroot::find_rstudio_root_file()
-    rprofile_path <- file.path(project_root, ".Rprofile")
+    tryCatch({
+        # Attempt to find the root of the current R project
+        project_root <- rprojroot::find_rstudio_root_file()
+
+        # Construct the path to the .Rprofile file within the project root
+        rprofile_path <- file.path(project_root, ".Rprofile")
+
+    }, error = function(e) {
+        stop("Unable to locate an R project root. Ensure that you are working within an RStudio project.", call. = FALSE)
+    })
+
 
     # If path is not provided, prompt the user interactively (if interactive mode is enabled)
     if (is.null(path)) {
