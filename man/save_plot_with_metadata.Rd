@@ -8,6 +8,7 @@ save_plot_with_metadata(
   plot_name,
   plot = NULL,
   save_dir = getOption("figure_save_path", "./"),
+  filetype = getOption("gecko.utils_default_filetype", "png"),
   prefix = TRUE,
   timestamp_format = "\%y\%m\%d",
   preserve_latest = FALSE,
@@ -23,6 +24,8 @@ save_plot_with_metadata(
 \item{plot}{A ggplot2 plot object to save. If not provided, defaults to the last ggplot created (\code{ggplot2::last_plot()}).}
 
 \item{save_dir}{Base directory for saving the plot. Uses the project-wide default path if set with \code{set_figure_save_path()}.}
+
+\item{filetype}{The file type to save the plot. For base R plots, use "png" or "pdf". For ggplot2 plots, use any valid file type (e.g., "png", "pdf", "jpeg", "tiff", etc.)}
 
 \item{prefix}{A logical or string indicating whether the script name should be included as a prefix in the filename. If a string is provided, it will be used as a custom prefix.}
 

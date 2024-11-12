@@ -4,7 +4,13 @@
 \alias{save_plot}
 \title{Helper function to save ggplot or base R plots}
 \usage{
-save_plot(full_path, plot_obj = NULL, print_from_device = FALSE, ...)
+save_plot(
+  full_path,
+  plot_obj = NULL,
+  print_from_device = FALSE,
+  filetype = "png",
+  ...
+)
 }
 \arguments{
 \item{full_path}{The full file path where the plot will be saved.}
@@ -12,6 +18,8 @@ save_plot(full_path, plot_obj = NULL, print_from_device = FALSE, ...)
 \item{plot_obj}{The plot object for ggplot2 (if applicable).}
 
 \item{print_from_device}{A logical indicating whether to save the plot from the current device (for base R plots).}
+
+\item{filetype}{The file type to save the plot. For base R plots, use "png" or "pdf". For ggplot2 plots, use any valid file type (e.g., "png", "pdf", "jpeg", "tiff", etc.)}
 
 \item{...}{Additional arguments passed to the ggsave function (for ggplot) or png (for base R).}
 }
