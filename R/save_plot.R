@@ -5,11 +5,12 @@
 #' @param full_path The full file path where the plot will be saved.
 #' @param plot_obj The plot object for ggplot2 (if applicable).
 #' @param print_from_device A logical indicating whether to save the plot from the current device (for base R plots).
+#' @param filetype The file type to save the plot. For base R plots, use "png" or "pdf". For ggplot2 plots, use any valid file type (e.g., "png", "pdf", "jpeg", "tiff", etc.)
 #' @param ... Additional arguments passed to the ggsave function (for ggplot) or png (for base R).
 #' @import ggplot2
-#' @importFrom grDevices dev.copy dev.off
+#' @importFrom grDevices dev.copy dev.off dev.copy2pdf
 #' @return The full path of the saved file.
-save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, ...) {
+save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, filetype = "png", ...) {
 
     # Save ggplot2 plot
     if (!print_from_device) {
@@ -24,12 +25,15 @@ save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, ...
         ggplot2::ggsave(filename = full_path, plot = plot_obj, ...)
 
         # Save base R plot from device
-    } else if (print_from_device) {
+    } else if (print_from_device  & filetype == "png") {
         dev.copy(png, filename = full_path)
         dev.off()
 
-        # Unsupported plot type
-    } else {
+    } else if (print_from_device & filetype == "pdf") {
+        dev.copy2pdf(file = full_path)
+        # dev.off()
+
+    } else { # Unsupported plot type
         stop("Unsupported plot type. Please use ggplot2 or base R plots")
     }
 

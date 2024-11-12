@@ -6,6 +6,7 @@
 #' @param plot_name A string for the plot's name, which will be part of the filename.
 #' @param plot A ggplot2 plot object to save. If not provided, defaults to the last ggplot created (`ggplot2::last_plot()`).
 #' @param save_dir Base directory for saving the plot. Uses the project-wide default path if set with `set_figure_save_path()`.
+#' @param filetype The file type to save the plot. For base R plots, use "png" or "pdf". For ggplot2 plots, use any valid file type (e.g., "png", "pdf", "jpeg", "tiff", etc.)
 #' @param prefix A logical or string indicating whether the script name should be included as a prefix in the filename. If a string is provided, it will be used as a custom prefix.
 #' @param timestamp_format The date format used in filenames (default: "%y%m%d").
 #' @param preserve_latest A logical indicating whether only the latest file version should be stored
@@ -34,9 +35,17 @@
 #'
 #' @export
 save_plot_with_metadata <- function(plot_name, plot = NULL, save_dir = getOption("figure_save_path", "./"),
+                                    filetype = getOption("gecko.utils_default_filetype", "png"),
                                     prefix = TRUE, timestamp_format = "%y%m%d", preserve_latest = FALSE,
                                     latest_subdir = "latest", archive_subdir = "archive",
                                     use_device = FALSE, ...) {
+
+    # check if the filetype is valid
+    if (use_device && !filetype %in% c("png", "pdf")) {
+        stop("Unsupported filetype for the plot type. Please use 'png' or 'pdf' for base R plots.")
+    } else if (!use_device && !filetype %in% c("eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg", "wmf")) {
+        stop("Unsupported filetype for the plot type. Please use a valid file type for ggplot2 plots.")
+    }
 
     # Normalize and create the main save directory if it doesn't exist
     normalized_save_dir <- normalizePath(save_dir, winslash = "/", mustWork = FALSE)
@@ -72,12 +81,12 @@ save_plot_with_metadata <- function(plot_name, plot = NULL, save_dir = getOption
 
     # Determine the final filename and move old versions if in "latest-only" mode
     if (preserve_latest) {
-        latest_file <- file.path(latest_path, paste0(base_filename, ".png"))
+        latest_file <- file.path(latest_path, paste(base_filename, filetype, sep = "."))
 
         # Archive the previous version if it exists
         if (file.exists(latest_file)) {
             current_date <- format(Sys.time(), timestamp_format)
-            archive_file <- file.path(archive_path, paste0(base_filename, "_", current_date, ".png"))
+            archive_file <- file.path(archive_path, paste0(base_filename, "_", current_date, ".", filetype))
             if (!file.exists(archive_file)) {  # Prevent duplicate archiving
                 file.rename(latest_file, archive_file)
                 message(sprintf("Archived old version to: %s", archive_file))
@@ -87,14 +96,15 @@ save_plot_with_metadata <- function(plot_name, plot = NULL, save_dir = getOption
     } else {
         # Standard mode: append timestamp to filename
         current_date <- format(Sys.time(), timestamp_format)
-        full_path <- file.path(normalized_save_dir, paste0(base_filename, "_", current_date, ".png"))
+        full_path <- file.path(normalized_save_dir, paste0(base_filename, "_", current_date, ".", filetype))
     }
 
     # Use helper function to save plot based on plot type
-    gecko.utils:::save_plot(
+    save_plot(
         full_path = full_path,
         plot_obj = plot,
         print_from_device = use_device,
+        filetype = filetype,
         ...
     )
 
