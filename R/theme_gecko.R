@@ -50,7 +50,7 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
   # Check if the desired font is available; if not, fall back to "Noto Sans" or show a warning
   if (font_family %in% extrafont::fonts()) {
     # Load the requested font if available
-    extrafont::loadfonts(device = "win", quiet = TRUE)
+    extrafont::loadfonts(device = "all", quiet = TRUE)
   } else {
     # If not available, attempt to load Noto Sans
     if (font_family == "Noto Sans") {
@@ -151,7 +151,7 @@ load_noto_sans <- function() {
   message("Loading Noto Sans font from package directory...")
   tryCatch({
     extrafont::ttf_import(paths = noto_path, recursive = TRUE)
-    extrafont::loadfonts(device = "win", quiet = TRUE)
+    extrafont::loadfonts(device = "all", quiet = TRUE)
     message("Noto Sans font successfully imported")
   }, error = function(e) {
     stop("Failed to import Noto Sans font. Ensure the font files are in the correct directory and restart.")
