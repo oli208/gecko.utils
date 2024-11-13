@@ -30,8 +30,8 @@ save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, fil
         dev.off()
 
     } else if (print_from_device & filetype == "pdf") {
-        dev.copy2pdf(file = full_path)
-        # dev.off()
+        dev.copy(pdf, file = full_path)
+        dev.off()
 
     } else { # Unsupported plot type
         stop("Unsupported plot type. Please use ggplot2 or base R plots")
