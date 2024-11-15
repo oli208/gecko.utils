@@ -19,6 +19,21 @@ test_that("save_plot_with_metadata saves ggplot2 plot with default naming conven
     file.remove(saved_path)
 })
 
+test_that("save_plot_with_metadata saves ggplot2 plot with default naming convention as pdf", {
+    # Create a simple ggplot
+    p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+
+    # Run the function
+    saved_path <- save_plot_with_metadata("test_plot", plot = p, save_dir = temp_dir, filetype = "pdf")
+
+    # Check that the file exists
+    expect_true(file.exists(saved_path))
+
+    # Clean up
+    file.remove(saved_path)
+})
+
+
 test_that("save_plot_with_metadata saves last ggplot2 plot when plot is not specified", {
     # Create a simple ggplot
     p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
