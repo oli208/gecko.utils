@@ -24,3 +24,18 @@ A \code{figure_info} object that can be added to a ggplot object.
 This function adds metadata to a ggplot as a caption, including the current date,
 script name, and optionally the R version.
 }
+\examples{
+library(ggplot2)
+library(gecko.utils)
+
+# Create a simple ggplot with r-version and datetime and R script name
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+geom_point() +
+figure_info()
+
+# Create a simple ggplot with additional custom text
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+geom_point() +
+figure_info(custom_text = "Data source: mtcars")
+
+}

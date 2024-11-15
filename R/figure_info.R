@@ -8,6 +8,21 @@
 #' @param datetime_format Optional. A string defining the date and time format for the caption. Defaults to "%d.%m.%Y %X".
 #' @return A `figure_info` object that can be added to a ggplot object.
 #' @import ggplot2
+#'
+#' @examples
+#' library(ggplot2)
+#' library(gecko.utils)
+#'
+#' # Create a simple ggplot with r-version and datetime and R script name
+#' ggplot(mtcars, aes(x = wt, y = mpg)) +
+#' geom_point() +
+#' figure_info()
+#'
+#' # Create a simple ggplot with additional custom text
+#' ggplot(mtcars, aes(x = wt, y = mpg)) +
+#' geom_point() +
+#' figure_info(custom_text = "Data source: mtcars")
+#'
 #' @export
 figure_info <- function(custom_text = NULL, include_r_version = TRUE, datetime_format = "%d.%m.%Y %X") {
   # Get the current date and time formatted as per the argument
