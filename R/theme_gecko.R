@@ -102,7 +102,6 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
 
         axis.title = ggplot2::element_text(
           family = font_family, # Font family
-          face = "bold", # Bold typeface
           size = axis_title_size # Font size
         ),
 
@@ -121,7 +120,7 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
 
         legend.title = ggplot2::element_text(
           family = font_family, # Font family
-          face = "bold", # Bold typeface
+        #  face = "bold", # Bold typeface
           size = axis_title_size # Font size
         ),
 
