@@ -142,9 +142,9 @@ parse_metadata <- function(metadata, key_col, desc_col, fields = c("Unit", "Symb
 #' )
 #'
 #' # Show metadata summary
-#' show_description(mtcars)
+#' show_meta_data(mtcars)
 #' @export
-show_description <- function(x, fields = NULL) {
+show_meta_data <- function(x, fields = NULL) {
   stopifnot(is.data.frame(x))
 
   # If fields are not provided, use all fields starting with "meta"
