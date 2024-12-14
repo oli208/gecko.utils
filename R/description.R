@@ -1,5 +1,8 @@
 #' @title Get or set metadata for data frame columns
-#' @description Retrieve or set metadata (e.g., descriptions, units, symbols) for data frame columns dynamically.
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Retrieve or set metadata (e.g., descriptions, units, symbols) for data frame columns dynamically.
 #' @param x A data frame or tibble.
 #' @param fields A character vector of metadata fields to retrieve. Defaults to `c("Description", "Unit", "Symbol")`.
 #' @return A named list of metadata for each column, with missing fields filled as `NA`.
@@ -85,7 +88,10 @@ meta_data <- function(x, fields = c("Description", "Unit", "Symbol")) {
 
 
 #' @title Parse Metadata Table
-#' @description Convert a metadata table into a list for easy assignment.
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Convert a metadata table into a list for easy assignment.
 #' @param metadata A data frame containing metadata.
 #' @param key_col Column specifying data field names.
 #' @param desc_col Column specifying descriptions.
@@ -125,7 +131,10 @@ parse_metadata <- function(metadata, key_col, desc_col, fields = c("Unit", "Symb
 
 
 #' @title Show Metadata of Dataframe
-#' @description Summarizes metadata for a data frame, including column names, types, and metadata attributes.
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Summarizes metadata for a data frame, including column names, types, and metadata attributes.
 #' @param x A data frame or tibble with metadata attributes.
 #' @param fields A character vector specifying the metadata fields to include in the summary.
 #'               Defaults to all fields starting with "meta".
@@ -135,10 +144,10 @@ parse_metadata <- function(metadata, key_col, desc_col, fields = c("Unit", "Symb
 #' data(mtcars)
 #'
 #' # Set metadata
-#' descriptions(mtcars) <- list(
-#'   mpg = list(meta_Description = "Miles/(US) gallon", meta_Unit = "mpg"),
-#'   cyl = list(meta_Description = "Number of cylinders", meta_Unit = "count"),
-#'   disp = list(meta_Description = "Displacement (cu.in.)", meta_Unit = "cu.in.")
+#' show_meta_data(mtcars) <- list(
+#'   mpg = list(Description = "Miles/(US) gallon", meta_Unit = "mpg"),
+#'   cyl = list(Description = "Number of cylinders", meta_Unit = "count"),
+#'   disp = list(Description = "Displacement (cu.in.)", meta_Unit = "cu.in.")
 #' )
 #'
 #' # Show metadata summary

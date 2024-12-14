@@ -19,6 +19,8 @@ parse_metadata(metadata, key_col, desc_col, fields = c("Unit", "Symbol"))
 A named list where each entry is metadata for a column.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Convert a metadata table into a list for easy assignment.
 }
 \examples{

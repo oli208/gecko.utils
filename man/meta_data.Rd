@@ -15,6 +15,8 @@ meta_data(x, fields = c("Description", "Unit", "Symbol"))
 A named list of metadata for each column, with missing fields filled as \code{NA}.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Retrieve or set metadata (e.g., descriptions, units, symbols) for data frame columns dynamically.
 }
 \examples{
