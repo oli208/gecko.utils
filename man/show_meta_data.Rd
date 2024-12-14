@@ -16,6 +16,8 @@ Defaults to all fields starting with "meta".}
 A tibble summarizing the metadata for each column.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Summarizes metadata for a data frame, including column names, types, and metadata attributes.
 }
 \examples{
@@ -23,10 +25,10 @@ Summarizes metadata for a data frame, including column names, types, and metadat
 data(mtcars)
 
 # Set metadata
-descriptions(mtcars) <- list(
-  mpg = list(meta_Description = "Miles/(US) gallon", meta_Unit = "mpg"),
-  cyl = list(meta_Description = "Number of cylinders", meta_Unit = "count"),
-  disp = list(meta_Description = "Displacement (cu.in.)", meta_Unit = "cu.in.")
+show_meta_data(mtcars) <- list(
+  mpg = list(Description = "Miles/(US) gallon", meta_Unit = "mpg"),
+  cyl = list(Description = "Number of cylinders", meta_Unit = "count"),
+  disp = list(Description = "Displacement (cu.in.)", meta_Unit = "cu.in.")
 )
 
 # Show metadata summary
