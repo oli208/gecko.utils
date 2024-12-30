@@ -132,7 +132,8 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
           face = "bold", # Bold typeface
           size = axis_title_size, # Font size
           vjust = 1
-        )
+        ),
+        strip.placement = "outside"
       )
   )
 }
