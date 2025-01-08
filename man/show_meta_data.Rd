@@ -4,7 +4,7 @@
 \alias{show_meta_data}
 \title{Show Metadata of Dataframe}
 \usage{
-show_meta_data(x, fields = NULL)
+show_meta_data(x, fields = NULL, show_in_viewer = FALSE)
 }
 \arguments{
 \item{x}{A data frame or tibble with metadata attributes.}
