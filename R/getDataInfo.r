@@ -1,7 +1,7 @@
 #' Get Information about Data
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("deprecated")`
 #'
 #' This function retrieves information about a specific data field from a metadata file.
 #' It calculates the Levenshtein distance between the provided variable name and the available data fields
