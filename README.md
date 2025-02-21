@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gecko.utils 📊🦎 <img src="man/figures/logo.png" align="right" height="150" alt="" />
+# gecko.utils 📊🦎 <img src="man/figures/logo.png" align="right" height="150"/>
 
 **A utility package for streamlined figure saving and metadata
 management in R, especially for LaTeX and project-based workflows.**
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![R](https://img.shields.io/badge/R-4.0%2B-blue.svg)](https://cran.r-project.org/)
+[![R](https://img.shields.io/badge/R-4.0%252B-blue.svg)](https://cran.r-project.org/)
 
 ## Overview
 
@@ -22,15 +22,18 @@ features, so you can focus on your analysis instead of managing files.
 
 ## Features
 
-- `theme_gecko()`: A custom `ggplot2` theme with minimal style.
-- `figure_info()`: Add metadata such as the R script name, creation
-  date, and R version directly to your plot captions
-- `save_plot_with_metadata()`: Save `ggplot` and base R figures with
-  file names that include the script name and the date of creation.
+- `theme_gecko()`: A custom `ggplot2` theme with a clean, minimalistic
+  design.
+- `figure_info()`: Adds metadata (such as the R script name, creation
+  date, and R version) directly to plot captions.
+- `save_plot_with_metadata()`: Saves `ggplot2` and base R figures with
+  structured file names, including the script name and creation date.
   There is an option to automatically archive older versions of figures
   and save the latest version in a subfolder, so that figures can be
   easily referenced from the latest file (without cluttering file names
   with dates).
+- `show_meta_data()`: Displays metadata for a given data frame,
+  including column descriptions, units, and other relevant attributes.
 
 ## Installation
 
@@ -132,9 +135,7 @@ p +
   figure_info()
 ```
 
-    #> Registering fonts with R
-
-<img src="man/figures/README-figure_info_theme_gecko-1.png" width="100%" />
+<img src="man/figures/README-figure_info_theme_gecko-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### 4. Set the Figure Save Path for the Current Project
 
@@ -171,6 +172,6 @@ page](https://github.com/oli208/gecko.utils/issues).
 
 ------------------------------------------------------------------------
 
-Happy plotting and automating your workflows with **`gecko.utils`**! 🦎
+Happy plotting with **`gecko.utils`**! 🦎
 
 ------------------------------------------------------------------------
