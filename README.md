@@ -152,6 +152,127 @@ every time.
 set_figure_save_path()
 ```
 
+## Metadata viewer
+
+The Metadata Viewer provides an approach to managing metadata in data
+frames. It allows users to dynamically display metadata such as
+descriptions, units and additional information. Metadata is stored
+directly as attributes of each column, ensuring accessibility and
+avoiding clutter with multiple data frames.
+
+### Add Metadata to Dataframe
+
+To start, we need to create a metadata dataframe containing information
+about each column in the `airquality` dataset.
+
+### Create Metadata DataFrame
+
+Before assigning metadata to a dataset, it is necessary to create or
+load a metadata table. This metadata should contain relevant annotations
+such as descriptions and units for each variable. The following example
+demonstrates how to create a metadata table for the built-in airquality
+dataset.
+
+``` r
+# Load the airquality dataset
+data(airquality)
+
+head(airquality)
+#>   Ozone Solar.R Wind Temp Month Day
+#> 1    41     190  7.4   67     5   1
+#> 2    36     118  8.0   72     5   2
+#> 3    12     149 12.6   74     5   3
+#> 4    18     313 11.5   62     5   4
+#> 5    NA      NA 14.3   56     5   5
+#> 6    28      NA 14.9   66     5   6
+```
+
+``` r
+# Create metadata dataframe
+metadata_airquality <- data.frame(
+  Datafield = names(airquality),
+  Description = c(
+    "Mean Ozone concentration from 1300 to 1500 hours at Roosevelt Island",
+    "Solar radiation in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park",
+    "Average wind speed at 0700 and 1000 hours at LaGuardia Airport",
+    "Maximum daily temperature at LaGuardia Airport",
+    "Month of measurement",
+    "Day of the month"
+  ),
+  Unit = c("ppb", "Langley", "mph", "F", "-", "-")
+)
+```
+
+The metadata table consists of three columns:
+
+- **Datafield:** The variable name in the dataset.
+- **Description:** A textual description of what the variable
+  represents.
+- **Unit:** The measurement unit associated with the variable (if
+  applicable).
+
+| Datafield | Description | Unit |
+|:---|:---|:---|
+| Ozone | Mean Ozone concentration from 1300 to 1500 hours at Roosevelt Island | ppb |
+| Solar.R | Solar radiation in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park | Langley |
+| Wind | Average wind speed at 0700 and 1000 hours at LaGuardia Airport | mph |
+| Temp | Maximum daily temperature at LaGuardia Airport | F |
+| Month | Month of measurement | \- |
+| Day | Day of the month | \- |
+
+### Assign Metadata to the Data Frame
+
+To link the metadata to the airquality dataset, the metadata table is
+assigned using the `meta_data()` function. This function stores metadata
+attributes directly within the data frame columns.
+
+``` r
+# combinde the metadata with the data frame
+meta_data(airquality) <- metadata_airquality
+```
+
+### Add Metadata for New Column
+
+In progress
+
+### Show Metadata of Dataframe
+
+The metadata can be displayed in the console or in the Viewer tab of
+RStudio.
+
+``` r
+# Show metadata in the console
+show_meta_data(airquality)
+#> # A tibble: 6 × 4
+#>   Column  Class   Description                                              Unit 
+#>   <chr>   <chr>   <chr>                                                    <chr>
+#> 1 Ozone   integer Mean Ozone concentration from 1300 to 1500 hours at Roo… ppb  
+#> 2 Solar.R integer Solar radiation in the frequency band 4000–7700 Angstro… Lang…
+#> 3 Wind    numeric Average wind speed at 0700 and 1000 hours at LaGuardia … mph  
+#> 4 Temp    integer Maximum daily temperature at LaGuardia Airport           F    
+#> 5 Month   integer Month of measurement                                     -    
+#> 6 Day     integer Day of the month                                         -
+```
+
+For better readability, metadata can also be displayed in RStudio’s
+Viewer tab as an interactive table. To display the metadata in the
+Viewer tab in RStudio, use the `show_in_viewer` argument.
+
+``` r
+# Show metadata in the Viewer tab
+show_meta_data(airquality, show_in_viewer = TRUE)
+```
+
+![](man/figures/metadata_viewer.png)
+
+You can also filter the displayed metadata to only show specific fields,
+such as `Description`.
+
+``` r
+# Show only Description in the Viewer tab
+show_meta_data(airquality, fields = c("Description"), show_in_viewer = TRUE)
+```
+
 ------------------------------------------------------------------------
 
 ## Contributing

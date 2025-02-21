@@ -145,8 +145,98 @@ This path can be used in the `save_plot_with_metadata()` function to save the fi
 set_figure_save_path()
 ```
 
+## Metadata viewer
+The Metadata Viewer provides an approach to managing metadata in data frames. It allows users to dynamically display metadata such as descriptions, units and additional information. Metadata is stored directly as attributes of each column, ensuring accessibility and avoiding clutter with multiple data frames.
+
+### Add Metadata to Dataframe
+To start, we need to create a metadata dataframe containing information about each column in the `airquality` dataset.
+
+### Create Metadata DataFrame
+
+Before assigning metadata to a dataset, it is necessary to create or load a metadata table.
+This metadata should contain relevant annotations such as descriptions and units for each variable.
+The following example demonstrates how to create a metadata table for the built-in airquality dataset.
+
+```{r load-airquality-data}
+# Load the airquality dataset
+data(airquality)
+
+head(airquality)
+```
+
+```{r create-metadata}
+# Create metadata dataframe
+metadata_airquality <- data.frame(
+  Datafield = names(airquality),
+  Description = c(
+    "Mean Ozone concentration from 1300 to 1500 hours at Roosevelt Island",
+    "Solar radiation in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park",
+    "Average wind speed at 0700 and 1000 hours at LaGuardia Airport",
+    "Maximum daily temperature at LaGuardia Airport",
+    "Month of measurement",
+    "Day of the month"
+  ),
+  Unit = c("ppb", "Langley", "mph", "F", "-", "-")
+)
+```
+
+The metadata table consists of three columns:
+
+-   **Datafield:** The variable name in the dataset.
+-   **Description:** A textual description of what the variable represents.
+-   **Unit:** The measurement unit associated with the variable (if applicable).
+
+```{r echo=FALSE}
+
+# Display the metadata dataframe
+
+knitr::kable(metadata_airquality)
+```
 
 
+
+
+
+### Assign Metadata to the Data Frame
+
+To link the metadata to the airquality dataset, the metadata table is assigned using the `meta_data()` function.
+This function stores metadata attributes directly within the data frame columns.
+
+```{r add-metadata}
+# combinde the metadata with the data frame
+meta_data(airquality) <- metadata_airquality
+```
+
+### Add Metadata for New Column
+
+In progress
+
+### Show Metadata of Dataframe
+
+The metadata can be displayed in the console or in the Viewer tab of RStudio.
+
+```{r show-metadata-console}
+# Show metadata in the console
+show_meta_data(airquality)
+```
+
+For better readability, metadata can also be displayed in RStudio's Viewer tab as an interactive table.
+To display the metadata in the Viewer tab in RStudio, use the `show_in_viewer` argument.
+
+```{r show-metadata-viewer, eval=FALSE}
+# Show metadata in the Viewer tab
+show_meta_data(airquality, show_in_viewer = TRUE)
+```
+
+
+![](man/figures/metadata_viewer.png)
+
+You can also filter the displayed metadata to only show specific fields, such as `Description`.
+
+```{r show-selected-fields, eval=FALSE}
+# Show only Description in the Viewer tab
+show_meta_data(airquality, fields = c("Description"), show_in_viewer = TRUE)
+```
 
 ------------------------------------------------------------------------
 
