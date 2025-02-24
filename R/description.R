@@ -6,6 +6,7 @@
 #' @param x A data frame or tibble.
 #' @param fields A character vector of metadata fields to retrieve. Defaults to `c("Description", "Unit", "Symbol")`.
 #' @return A named list of metadata for each column, with missing fields filled as `NA`.
+#' @importFrom stats setNames
 #' @examples
 #' # Example using mtcars dataset
 #' data(mtcars)
@@ -18,9 +19,11 @@
 #' )
 #'
 #' # Set metadata using data frame
-#' meta_data(mtcars) <- data.frame(Datafield = c("mpg", "cyl", "disp"),
-#'                                Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
-#'                                Unit = c("mpg", "count", "cu.in."))
+#' meta_data(mtcars) <- data.frame(
+#' Datafield = c("mpg", "cyl", "disp"),
+#' Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
+#' Unit = c("mpg", "count", "cu.in.")
+#' )
 #'
 #'
 #' # Get metadata
@@ -138,6 +141,7 @@ parse_metadata <- function(metadata, key_col, desc_col, fields = c("Unit", "Symb
 #' @param x A data frame or tibble with metadata attributes.
 #' @param fields A character vector specifying the metadata fields to include in the summary.
 #'               Defaults to all fields starting with "meta".
+#' @param show_in_viewer A logical indicating whether to display the metadata in the console (FALSE) or in the interactive viewer (TRUE).
 #' @return A tibble summarizing the metadata for each column.
 #' @examples
 #' # Example using mtcars dataset

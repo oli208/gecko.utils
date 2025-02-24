@@ -24,7 +24,8 @@
 #' p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
 #' save_plot_with_metadata(plot_name = "mtcars_scatter", save_dir = "figures")
 #'
-#' # Save a plot to always overwrite the previous version (useful for workflows with direct linked figures)
+#' # Save a plot to always overwrite the previous version
+#' # (useful for workflows with direct linked figures)
 #' # The latest version will be stored in the "latest" subdirectory, if there is
 #' # an older file with the same name, the old file will be archived.
 #' save_plot_with_metadata("mtcars_scatter", save_dir = "figures", preserve_latest = TRUE)
