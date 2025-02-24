@@ -14,9 +14,6 @@ Imports:
     tools,
     rstudioapi,
     dplyr,
-    janitor,
-    readxl,
-    stringdist,
     rprojroot,
     htmltools,
     reactable
