@@ -8,7 +8,7 @@
 #' @param filetype The file type to save the plot. For base R plots, use "png" or "pdf". For ggplot2 plots, use any valid file type (e.g., "png", "pdf", "jpeg", "tiff", etc.)
 #' @param ... Additional arguments passed to the ggsave function (for ggplot) or png (for base R).
 #' @import ggplot2
-#' @importFrom grDevices dev.copy dev.off dev.copy2pdf
+#' @importFrom grDevices dev.copy dev.off dev.copy2pdf pdf png
 #' @return The full path of the saved file.
 save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, filetype = "png", ...) {
 
