@@ -64,7 +64,10 @@ ggplot_add.figure_info <- function(object, plot, object_name) {
     warning("The plot already has a caption. `figure_info()` did not overwrite it.")
   } else {
     # Add the generated caption to the plot
-    plot <- plot + labs(caption = object$caption_text)
+    plot <- plot + labs(caption = object$caption_text) +
+        # increase the margin between the plot and the caption
+        theme(plot.caption = element_text(margin = margin(t = 20)))
+
   }
   plot
 }
