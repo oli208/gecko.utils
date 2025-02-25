@@ -11,6 +11,8 @@ show_meta_data(x, fields = NULL, show_in_viewer = FALSE)
 
 \item{fields}{A character vector specifying the metadata fields to include in the summary.
 Defaults to all fields starting with "meta".}
+
+\item{show_in_viewer}{A logical indicating whether to display the metadata in the console (FALSE) or in the interactive viewer (TRUE).}
 }
 \value{
 A tibble summarizing the metadata for each column.

@@ -1,0 +1,19 @@
+---
+title: "gecko_utils"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gecko_utils}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gecko.utils)
+```

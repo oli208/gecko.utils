@@ -1,6 +1,7 @@
 #' Custom theme for ggplot2 with font setup and font fallback
 #'
-#' This function provides a custom ggplot2 theme with options for changing fonts and text sizes.
+#' This function provides a ggplot2 theme with a clean, minimalistic design and
+#' the options for changing fonts and text sizes.
 #' It ensures that extrafont is loaded and the fonts are registered if necessary.
 #'
 #' @param font_family A string representing the font family to use. Defaults to "Noto Sans".
@@ -10,9 +11,11 @@
 #' @param caption_size Font size for the plot caption. Defaults to 9.
 #' @param axis_title_size Font size for the axis titles. Defaults to 12.
 #' @param axis_text_size Font size for the axis text. Defaults to 11.
+#'
 #' @return A ggplot2 theme object.
 #' @import ggplot2
 #' @importFrom extrafont fonts loadfonts ttf_import
+#'
 #' @examples
 #' library(ggplot2)
 #'
