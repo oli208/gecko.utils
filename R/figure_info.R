@@ -66,7 +66,7 @@ ggplot_add.figure_info <- function(object, plot, object_name) {
     # Add the generated caption to the plot
     plot <- plot + labs(caption = object$caption_text) +
         # increase the margin between the plot and the caption
-        theme(plot.caption = element_text(margin = margin(t = 20)))
+        theme(plot.caption = element_text(margin = margin(t = 10)))
 
   }
   plot
