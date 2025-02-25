@@ -7,7 +7,7 @@
 management in R, especially for LaTeX and project-based workflows.**
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![R](https://img.shields.io/badge/R-4.0%252B-blue.svg)](https://cran.r-project.org/)
+[![R](https://img.shields.io/badge/R-4.4.2-blue.svg)](https://cran.r-project.org/)
 
 ## Overview
 
@@ -34,6 +34,8 @@ features, so you can focus on your analysis instead of managing files.
   with dates).
 - `show_meta_data()`: Displays metadata for a given data frame,
   including column descriptions, units, and other relevant attributes.
+  Before you have to use `meta_data()` to assign metadata to a data
+  frame.
 
 ## Installation
 
@@ -75,7 +77,7 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
 
 ``` save
 # Save plot using save_plot_with_metadata
-save_plot_with_metadata(plot_name = "scatterplot", filepath = "images", width = 10, height = 7)
+save_plot_with_metadata(plot_name = "scatterplot", save_dir = "images", width = 10, height = 7)
 ```
 
 There are several arguments you can use with `save_plot_with_metadata()`
@@ -139,14 +141,14 @@ p +
 
 ### 4. Set the Figure Save Path for the Current Project
 
-The gecko.utils package has the possiblity to get the figure save path
+The gecko.utils package has the possibility to get the figure save path
 for the current project. This is useful when you are working with
 R-Projects and want to save the figures in a specific folder. After
 running the function `set_figure_save_path()` the path to the specified
-folder in the current project is saved in the project. This path can be
-used in the `save_plot_with_metadata()` function to save the figures in
-the specified folder, without the need to specify the path to the folder
-every time.
+folder in the current project is saved in the project in the
+`.Rprofile`. This path can be used in the `save_plot_with_metadata()`
+function to save the figures in the specified folder, without the need
+to specify the path to the folder every time.
 
 ``` r
 set_figure_save_path()
