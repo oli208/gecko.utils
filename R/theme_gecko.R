@@ -98,7 +98,7 @@ theme_gecko <- function(font_family = "Noto Sans", # Default font family
           family = font_family, # Font family
           size = caption_size, # Font size
           hjust = 0, # Left align
-          margin = margin(t = 10))
+          margin = margin(t = 10) # Add margin to the top
         ),
 
         axis.title = ggplot2::element_text(
