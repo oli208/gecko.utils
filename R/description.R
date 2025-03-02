@@ -20,9 +20,9 @@
 #'
 #' # Set metadata using data frame
 #' meta_data(mtcars) <- data.frame(
-#' Datafield = c("mpg", "cyl", "disp"),
-#' Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
-#' Unit = c("mpg", "count", "cu.in.")
+#'   Datafield = c("mpg", "cyl", "disp"),
+#'   Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
+#'   Unit = c("mpg", "count", "cu.in.")
 #' )
 #'
 #'
@@ -32,23 +32,30 @@
 meta_data <- function(x, fields = c("Description", "Unit", "Symbol")) {
   stopifnot(is.data.frame(x))
 
-  # For each column, extract metadata attributes
-  lapply(names(x), function(col) {
-    attributes <- attributes(x[[col]])
+  # Initialize an empty list to store results
+  result <- list()
+
+  # Iterate over each column in the dataframe
+  for (col in names(x)) {
+    attributes_list <- attributes(x[[col]])
 
     # Extract metadata fields prefixed with "meta_"
-    meta_data <- grep("^meta_", names(attributes), value = TRUE)
+    meta_data_keys <- grep("^meta_", names(attributes_list), value = TRUE)
+
     meta_list <- setNames(lapply(fields, function(field) {
       meta_key <- paste0("meta_", field)
-      if (meta_key %in% meta_data) {
-        attributes[[meta_key]]
+      if (meta_key %in% meta_data_keys) {
+        attributes_list[[meta_key]]
       } else {
         NA_character_
       }
     }), fields)
 
-    return(meta_list)
-  }) %>% setNames(names(x))
+    # Store result in the list
+    result[[col]] <- meta_list
+  }
+
+  return(result)
 }
 
 #' @export
@@ -57,7 +64,7 @@ meta_data <- function(x, fields = c("Description", "Unit", "Symbol")) {
 
   # If `value` is a data.frame, attempt to parse it using `parse_metadata`
   if (is.data.frame(value)) {
-    required_cols <- c("Datafield", "Description")  # Default required columns
+    required_cols <- c("Datafield", "Description") # Default required columns
     stopifnot(all(required_cols %in% names(value)))
 
     value <- parse_metadata(
@@ -86,7 +93,7 @@ meta_data <- function(x, fields = c("Description", "Unit", "Symbol")) {
     }
   }
 
-  invisible(x)  # Avoid unnecessary output
+  invisible(x) # Avoid unnecessary output
 }
 
 
@@ -120,7 +127,7 @@ parse_metadata <- function(metadata, key_col, desc_col, fields = c("Unit", "Symb
   stopifnot(all(fields %in% names(metadata)))
 
   # Parse metadata into a structured list
-  lapply(seq_len(nrow(metadata)), function(i) {
+  result <- lapply(seq_len(nrow(metadata)), function(i) {
     entry <- metadata[i, ]
     setNames(lapply(fields, function(field) {
       if (!is.null(entry[[field]])) {
@@ -129,8 +136,14 @@ parse_metadata <- function(metadata, key_col, desc_col, fields = c("Unit", "Symb
         NA_character_
       }
     }), fields)
-  }) %>% setNames(metadata[[key_col]])
+  })
+
+  # Set names of the list to match key_col values
+  names(result) <- metadata[[key_col]]
+
+  return(result)
 }
+
 
 
 #' @title Show Metadata of Dataframe
@@ -168,14 +181,18 @@ show_meta_data <- function(x, fields = NULL, show_in_viewer = FALSE) {
 
   metadata <- meta_data(x, fields = fields)
 
-  # Build output tibble dynamically based on requested fields
-  df_metadata <- tibble::tibble(
+  # Build output data frame dynamically based on requested fields
+  df_metadata <- data.frame(
     Column = names(x),
     Class = sapply(x, function(col) paste(class(col), collapse = " ")),
-    !!!lapply(fields, function(field) {
-      sapply(metadata, function(meta) if (!is.null(meta[[field]])) meta[[field]] else NA_character_)
-    }) %>% setNames(fields)
+    stringsAsFactors = FALSE
   )
+
+  for (field in fields) {
+    df_metadata[[field]] <- sapply(metadata, function(meta) {
+      if (!is.null(meta[[field]])) meta[[field]] else NA_character_
+    })
+  }
 
   if (show_in_viewer) {
     show_dataframe_in_viewer(df_metadata)
@@ -197,7 +214,6 @@ show_meta_data <- function(x, fields = NULL, show_in_viewer = FALSE) {
 #' @importFrom htmltools tagList tags HTML
 #'
 show_dataframe_in_viewer <- function(df, ...) {
-
   htmltools::browsable(
     htmltools::tagList(
       tags$style(HTML("
@@ -233,7 +249,6 @@ show_dataframe_in_viewer <- function(df, ...) {
           "Metadata viewer",
           style = "font-size: 1.2rem; font-weight: bold; font-family: system-ui;"
         ),
-
         class = "button-container",
         tags$button(
           "Show/hide class column",

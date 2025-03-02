@@ -32,9 +32,9 @@ meta_data(mtcars) <- list(
 
 # Set metadata using data frame
 meta_data(mtcars) <- data.frame(
-Datafield = c("mpg", "cyl", "disp"),
-Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
-Unit = c("mpg", "count", "cu.in.")
+  Datafield = c("mpg", "cyl", "disp"),
+  Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
+  Unit = c("mpg", "count", "cu.in.")
 )
 
 
