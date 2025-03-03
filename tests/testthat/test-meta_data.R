@@ -26,7 +26,7 @@ test_that("meta_data<- works with data frame input", {
     data(mtcars)
 
     # Test setting metadata using a data frame
-    metadata_df <- tibble::tibble(
+    metadata_df <- data.frame(
         Datafield = c("mpg", "cyl", "disp"),
         Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
         Unit = c("mpg", "count", "cu.in.")
@@ -40,7 +40,7 @@ test_that("meta_data<- works with data frame input", {
 })
 
 test_that("parse_metadata correctly parses a metadata table", {
-    metadata_df <- tibble::tibble(
+    metadata_df <- data.frame(
         Datafield = c("mpg", "cyl", "disp"),
         Description = c("Miles/(US) gallon", "Number of cylinders", "Displacement (cu.in.)"),
         Unit = c("mpg", "count", "cu.in."),
@@ -75,7 +75,7 @@ test_that("show_meta_data generates a correct summary", {
     summary <- show_meta_data(mtcars)
 
     # Verify output
-    expect_s3_class(summary, "tbl_df")
+    expect_s3_class(summary, "data.frame")
     expect_equal(summary$Column, names(mtcars))
     expect_equal(unname(summary$Description[1]), "Miles/(US) gallon")
     expect_equal(unname(summary$Unit[2]), "count")
