@@ -32,5 +32,5 @@ metadata <- data.frame(
 )
 
 # Parse metadata
-parse_metadata(metadata, key_col = "Datafield", desc_col = "Description")
+parse_metadata(metadata, key_col = "Datafield", desc_col = "Description", fields = "Unit")
 }

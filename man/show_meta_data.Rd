@@ -27,7 +27,7 @@ Summarizes metadata for a data frame, including column names, types, and metadat
 data(mtcars)
 
 # Set metadata
-show_meta_data(mtcars) <- list(
+meta_data(mtcars) <- list(
   mpg = list(Description = "Miles/(US) gallon", meta_Unit = "mpg"),
   cyl = list(Description = "Number of cylinders", meta_Unit = "count"),
   disp = list(Description = "Displacement (cu.in.)", meta_Unit = "cu.in.")
