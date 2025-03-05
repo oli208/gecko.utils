@@ -13,11 +13,12 @@
 #'
 #'
 #' @examples
-#'
+#'\dontrun{
 #' library(gecko.utils)
 #'
 #' # Set the figure_save_path to interactively
 #' set_figure_save_path()
+#'}
 #' @export
 set_figure_save_path <- function(path = NULL, interactive = TRUE, confirm_overwrite = TRUE) {
 
