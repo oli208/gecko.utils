@@ -37,7 +37,8 @@ show_meta_data <- function(x, fields = NULL, show_in_viewer = FALSE) {
     df_metadata <- data.frame(
         Column = names(x),
         Class = sapply(x, function(col) paste(class(col), collapse = " ")),
-        stringsAsFactors = FALSE
+        stringsAsFactors = FALSE,
+        row.names = NULL
     )
 
     for (field in fields) {
