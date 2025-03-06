@@ -18,6 +18,8 @@ get_current_script_path <- function(only_filename = FALSE, throw_error_if_missin
     current_script_path <- tryCatch({
         if (rstudioapi::isAvailable()) {
             rstudioapi::getActiveDocumentContext()$path
+        } else if (requireNamespace("knitr")) {
+            knitr::current_input()
         }
     }, error = function(e) {
         if (throw_error_if_missing) {
