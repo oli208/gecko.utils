@@ -31,7 +31,8 @@ Fallbacks to "Arial" or "sans" if not found.}
 A ggplot2 theme object.
 }
 \description{
-This function provides a custom ggplot2 theme with options for changing fonts and text sizes.
+This function provides a ggplot2 theme with a clean, minimalistic design and
+the options for changing fonts and text sizes.
 It ensures that extrafont is loaded and the fonts are registered if necessary.
 }
 \examples{

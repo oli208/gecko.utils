@@ -28,7 +28,7 @@ ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("figure_sa
 
 
      # Get the current script file path
-    script_path <- gecko.utils:::get_current_script_path()
+    script_path <- get_current_script_path()
 
     # Extract the script filename without extension
     script_filename <- tools::file_path_sans_ext(basename(script_path))
@@ -46,7 +46,7 @@ ggsave_custom <- function(name, plot_obj = NULL, filepath = getOption("figure_sa
     full_path <- file.path(normalized_filepath, paste0(script_filename, "_", name, "_", current_date, ".png"))
 
     # Use helper function to save the plot based on the plot_type
-    gecko.utils:::save_plot(full_path = full_path,
+    save_plot(full_path = full_path,
                             plot_obj = plot_obj,
                             print_from_device = print_from_device,
                             ...

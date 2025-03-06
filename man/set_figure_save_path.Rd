@@ -22,9 +22,10 @@ This function helps users set and persist the \code{figure_save_path} option in 
 Users can specify a directory to store figues and choose whether to apply the setting interactively.
 }
 \examples{
-
+\dontrun{
 library(gecko.utils)
 
 # Set the figure_save_path to interactively
 set_figure_save_path()
+}
 }

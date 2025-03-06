@@ -2,17 +2,19 @@
 #'
 #' A flexible function to save plots (ggplot2, base R, etc.) with a customizable filename.
 #' The filename includes metadata such as the script name, plot name, and current date.
+#' It also supports automatic versioning by maintaining the latest plot version while archiving older versions.
+#'
 #'
 #' @param plot_name A string for the plot's name, which will be part of the filename.
-#' @param plot A ggplot2 plot object to save. If not provided, defaults to the last ggplot created (`ggplot2::last_plot()`).
+#' @param plot A ggplot2 plot object. If not provided, defaults to the last ggplot created (`ggplot2::last_plot()`).
 #' @param save_dir Base directory for saving the plot. Uses the project-wide default path if set with `set_figure_save_path()`.
-#' @param filetype The file type to save the plot. For base R plots, use "png" or "pdf". For ggplot2 plots, use any valid file type (e.g., "png", "pdf", "jpeg", "tiff", etc.)
+#' @param filetype The output file format. Supports `"png"`, `"pdf"`, `"jpeg"`, `"tiff"`, etc. For base R plots, use `"png"` or `"pdf"`.
 #' @param prefix A logical or string indicating whether the script name should be included as a prefix in the filename. If a string is provided, it will be used as a custom prefix.
-#' @param timestamp_format The date format used in filenames (default: "%y%m%d").
+#' @param timestamp_format The date format used in filenames (default: `"%y%m%d"`).
 #' @param preserve_latest A logical indicating whether only the latest file version should be stored
 #'                        with a consistent filename, without a date suffix.
-#' @param latest_subdir Subdirectory to store the latest version if `preserve_latest = TRUE`.
-#' @param archive_subdir Subdirectory to store older versions if `preserve_latest = TRUE`.
+#' @param latest_subdir The subdirectory where the latest version of the plot is stored when `preserve_latest = TRUE`.
+#' @param archive_subdir The subdirectory where older versions of the plot are archived when `preserve_latest = TRUE`.
 #' @param use_device Logical. If `TRUE`, the function will save from the active graphics device (useful for base R plots).
 #' @param ... Additional arguments for `ggsave()` (ggplot2) or `png()` (base R), such as width, height, etc.
 #' @return Returns the full path of the saved plot.
@@ -20,17 +22,21 @@
 #' @examples
 #' library(ggplot2)
 #' library(gecko.utils)
-#' # Save a ggplot2 plot with metadata (scriptname, plot_name, date) in the filename
+#' # Example 1: Save a ggplot2 plot with metadata (scriptname, plot_name, date) in the filename
 #' p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
-#' save_plot_with_metadata(plot_name = "mtcars_scatter", save_dir = "figures")
+#' save_plot_with_metadata(plot = p, plot_name = "mtcars_scatter", save_dir = "figures")
 #'
-#' # Save a plot to always overwrite the previous version
+#' # Example 2:  Keep only the latest version, archiving older versions automatically
 #' # (useful for workflows with direct linked figures)
 #' # The latest version will be stored in the "latest" subdirectory, if there is
 #' # an older file with the same name, the old file will be archived.
 #' save_plot_with_metadata("mtcars_scatter", save_dir = "figures", preserve_latest = TRUE)
 #'
-#' # Save a base R plot with a custom filename
+#' # Example 3: Save a plot with custom dimensions
+#' save_plot_with_metadata("mtcars_scatter", save_dir = "figures",
+#'     width = 15, height = 10, units = "cm")
+#'
+#' # Example 4: Save a base R plot with a custom filename
 #' plot(1:10, 1:10)
 #' save_plot_with_metadata("base_r_plot", use_device = TRUE)
 #'

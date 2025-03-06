@@ -42,7 +42,7 @@ ggsave_latex <- function(plot_name, plot_obj = NULL, base_dir = getOption("figur
     }
 
     # Get the script name and create the base filename without date
-    script_name <- tools::file_path_sans_ext(basename(gecko.utils:::get_current_script_path()))
+    script_name <- tools::file_path_sans_ext(basename(get_current_script_path()))
     base_filename <- paste0(script_name, "_", plot_name)
 
     # Full path for the LaTeX file (without date)
@@ -59,7 +59,7 @@ ggsave_latex <- function(plot_name, plot_obj = NULL, base_dir = getOption("figur
     }
 
     # Save the new plot in the LaTeX folder without the date in the filename
-    gecko.utils:::save_plot(full_path = latex_file,
+    save_plot(full_path = latex_file,
                             plot_obj = plot_obj,
                             print_from_device = print_from_device,
                             ...
