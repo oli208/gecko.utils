@@ -10,7 +10,20 @@
 #' @import ggplot2
 #' @importFrom grDevices dev.copy dev.off dev.copy2pdf pdf png
 #' @return The full path of the saved file.
-save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, filetype = "png", ...) {
+save_plot <- function(full_path, plot_obj = NULL,
+                      print_from_device = FALSE,
+                      filetype = "png",
+                      width = 8,
+                      height = 6,
+                      dpi = 300,
+                      units = c("in", "cm", "mm", "px"),
+                      ...
+                      ) {
+
+    if (print_from_device) {
+        # Validate that there is an open device to copy from
+        if (dev.cur() == 1) stop("No open graphics device to copy from. Create a plot on a device first, or set print_from_device = FALSE and pass a plot object.")
+    }
 
     # Save ggplot2 plot
     if (!print_from_device) {
@@ -22,15 +35,29 @@ save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, fil
             }
         }
         # Save the ggplot
-        ggplot2::ggsave(filename = full_path, plot = plot_obj, ...)
+        ggplot2::ggsave(filename = full_path, plot = plot_obj, width = width,
+                        height = height, units = units, dpi = dpi,...)
 
         # Save base R plot from device
     } else if (print_from_device  & filetype == "png") {
-        dev.copy(png, filename = full_path)
+        dev.copy(
+            grDevices::png,
+            filename = full_path,
+            width    = to_pixels(width, units, dpi),
+            height   = to_pixels(height, units, dpi),
+            res      = dpi,
+            ...
+        )
         dev.off()
 
     } else if (print_from_device & filetype == "pdf") {
-        dev.copy(pdf, file = full_path)
+        dev.copy(
+            grDevices::pdf,
+            file = full_path,
+            width    = to_inches(width, units, dpi),
+            height   = to_inches(height, units, dpi),
+            ...
+        )
         dev.off()
 
     } else { # Unsupported plot type
@@ -40,3 +67,23 @@ save_plot <- function(full_path, plot_obj = NULL, print_from_device = FALSE, fil
     # Return the file path of the saved plot
     return(full_path)
 }
+
+
+
+# conversion helper: convert width/height to inches when needed (used for pdf and when converting px)
+to_inches <- function(value, units, dpi) {
+    if (units == "in") return(value)
+    if (units == "cm") return(value / 2.54)
+    if (units == "mm") return(value / 25.4)
+    if (units == "px") return(value / dpi)
+    stop("Unknown units in to_inches(): ", units)
+}
+
+# Conversion helper: get pixels from width/height when units == "px"
+to_pixels <- function(value, units, dpi) {
+    if (units == "px") return(round(value))
+    # convert to inches first then to px
+    inches <- to_inches(value, units, dpi)
+    return(round(inches * dpi))
+}
+

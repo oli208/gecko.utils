@@ -9,6 +9,10 @@ save_plot(
   plot_obj = NULL,
   print_from_device = FALSE,
   filetype = "png",
+  width = 8,
+  height = 6,
+  dpi = 300,
+  units = c("in", "cm", "mm", "px"),
   ...
 )
 }
